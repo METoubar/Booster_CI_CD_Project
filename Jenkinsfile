@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker run -d -p 3000:3000 mtoubar/jenkins_node:v1.0'
+                sh 'docker run -dit -p 3000:3000 mtoubar/jenkins_node:v1.0'
             }
         }
     }
