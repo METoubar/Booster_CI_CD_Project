@@ -9,7 +9,7 @@ pipeline {
 
         stage('build Image'){
             steps {
-                sh 'docker build -f dockerfile . -t mtoubar/jenkins_node:v1.0'
+                sh 'docker build -f django_app . -t mtoubar/jenkins_node:v1.0'
             }
         }
 
