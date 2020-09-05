@@ -25,8 +25,9 @@ pipeline {
             steps {
                 sh 'docker run -d -p 3000:3000 mtoubar/jenkins_node:v1.0'
             }
-
-            post {
+        }
+    }
+    post {
                 success {
                 slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
                 }
@@ -43,6 +44,4 @@ pipeline {
                 slackSend (color: '#000000', message: "ABORTED: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
                 }
             }
-        }
-    }
 }
