@@ -37,7 +37,7 @@ pipeline {
                 slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
                 }
 
-                aborted {
+                unstable {
                 slackSend (color: '#FDDB3A', message: "Unstable: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
                 }
 
