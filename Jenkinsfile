@@ -23,8 +23,26 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker run -d -p 3000:3000 mtoubar/jenkins_node:v1.0'
+                sh 'docker run -d -p 8000:8000 mtoubar/jenkins_node:v1.0'
             }
         }
     }
+
+    post {
+                success {
+                slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
+                }
+
+                failure {
+                slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
+                }
+
+                unstable {
+                slackSend (color: '#FDDB3A', message: "Unstable: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
+                }
+
+                aborted {
+                slackSend (color: '#000000', message: "ABORTED: Job '${env.JOB_NAME}  [${env.BUILD_NUMBER}]' (${env.BUILD_URL}console)")
+                }
+            }
 }
