@@ -9,7 +9,7 @@ pipeline {
 
         stage('build Image'){
             steps {
-                sh 'docker build -f django_app . -t mtoubar/jenkins_node:v1.0'
+                sh 'docker build -f django_app . -t mtoubar/jenkins_node:v2.0'
             }
         }
 
@@ -17,13 +17,13 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId:"docker",usernameVariable:"USERNAME",passwordVariable:"PASSWORD")]) {
                     sh 'docker login --username $USERNAME --password $PASSWORD'
-                    sh 'docker push mtoubar/jenkins_node:v1.0'
+                    sh 'docker push mtoubar/jenkins_node:v2.0'
                 }
             }
         }
         stage('Deploy'){
             steps {
-                sh 'docker run -d -p 8000:8000 mtoubar/jenkins_node:v1.0'
+                sh 'docker run -d -p 9000:9000 mtoubar/jenkins_node:v2.0'
             }
         }
     }
